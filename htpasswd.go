@@ -21,6 +21,8 @@ const (
 	HashBCrypt = "bcrypt"
 	// HashSHA sha5 insecure - do not use
 	HashSHA = "sha"
+	// MD5
+	HashMD5 = "md5"
 )
 
 const (
@@ -60,6 +62,8 @@ func (hp HashedPasswords) SetPassword(name, password string, hashAlgorithm HashA
 	case HashSHA:
 		prefix = "{SHA}"
 		hash = hashSha(password)
+	case HashMD5:
+                hash = md5(password)
 	}
 	if err != nil {
 		return err
