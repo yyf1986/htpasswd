@@ -3,6 +3,7 @@ package htpasswd
 import (
 	"crypto/sha1"
 	"encoding/base64"
+	"os/exec"
 
 	"golang.org/x/crypto/bcrypt"
 )
@@ -20,4 +21,10 @@ func hashBcrypt(password string) (hash string, err error) {
 		return
 	}
 	return string(passwordBytes), nil
+}
+//参照python版的md5
+func md5(password string) string {
+	command := "openssl passwd -apr1 " + password
+	newpass, _ := exec.Command("/bin/bash", "-c", command).Output()
+	return string(newpass)
 }
